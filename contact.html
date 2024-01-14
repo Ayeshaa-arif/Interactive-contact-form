@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form with Validation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #3498db, #2c3e50);
+      color: #2c475f;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+        background-color: #2d4d66;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #1e7db2;
+    }
+
+    .error {
+      color: #e74c3c;
+      margin-bottom: 16px;
+    }
+
+    .success {
+      color: #2ecc71;
+      margin-bottom: 16px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<form id="contactForm">
+  <h2>Contact Us</h2>
+
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+
+  <button type="button" onclick="validateForm()">Submit</button>
+
+  <div id="error-msg" class="error"></div>
+  <div id="success-msg" class="success"></div>
+  
+  <p>By Clicking the Sign Up button, you agree to our<br>
+    <a href="#">Terms and Conditions</a> and <a href="#">Policy Privacy</a>
+    </p>
+</form>
+
+<script>
+  function validateForm() {
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var message = document.getElementById('message').value;
+
+    var errorMsg = document.getElementById('error-msg');
+    var successMsg = document.getElementById('success-msg');
+
+    errorMsg.innerHTML = "";
+    successMsg.innerHTML = "";
+
+    if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
+      errorMsg.innerHTML = "All fields are required";
+      return;
+    }
+
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errorMsg.innerHTML = "Invalid email address";
+      return;
+    }
+
+    // You can add more custom validations as needed.
+
+    // If all validations pass, show success message.
+    successMsg.innerHTML = "Form submitted successfully!";
+  }
+</script>
+
+</body>
+</html>
